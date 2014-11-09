@@ -7,7 +7,7 @@ before_install:
  - sudo apt-get update -qq
  - sudo apt-get install -qq python-apt python-pycurl
 install:
-  - pip install ansible==1.5.0
+  - pip install ansible
   - pip install https://github.com/willthames/ansible-lint/archive/master.zip
 script:
 
@@ -17,7 +17,7 @@ script:
   - "ansible-playbook -i tests/inventory tests/$SITE --syntax-check"
 
   # Check the role/playbook's lint.
-  - "ansible-lint -i tests/$SITE"
+  - "ansible-lint tests/$SITE"
 
   # Run the role/playbook with ansible-playbook.
   - "ansible-playbook -i tests/inventory tests/$SITE --connection=local -vv"
