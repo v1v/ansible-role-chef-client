@@ -4,7 +4,7 @@
     url="https://www.opscode.com/chef/metadata?prerelease={{ prerelease }}&nightlies={{ nightlies }}&p={{ item }}&pv={{ ansible_distribution_version }}&m={{ ansible_architecture }}"
     dest={{ installer_dir }}/metadata
   with_items: mac_os_x
-  register: register_metadat_url
+  register: register_metadata_url
   tags: [chef-client, download]
 
 - name: MacOSX | Read metadata
