@@ -1,19 +1,19 @@
 ---
-- name: Ubuntu | Fetch metadata
+- name: Centos | Fetch metadata
   get_url:
-    url="https://www.opscode.com/chef/metadata?prerelease={{ prerelease }}&nightlies={{ nightlies }}&p={{ item }}&pv={{ ansible_distribution_version }}&m={{ ansible_architecture }}"
+    url="https://www.opscode.com/chef/metadata?prerelease={{ prerelease }}&nightlies={{ nightlies }}&p={{ item }}&pv=6&m=i686"
     dest={{ installer_dir }}/metadata
-  with_items: ubuntu
+  with_items: el
   register: register_metadata_url
   tags: [chef-client, download]
 
-- name: Ubuntu | Read metadata
+- name: Centos | Read metadata
   command: cat {{ installer_dir }}/metadata
   register: register_metadata
   tags: [chef-client, download]
   when: register_metadata_url.changed
 
-- name: Ubuntu | Set metadata facts
+- name: Centos | Set metadata facts
   set_fact:
     chef-client_loaded_os_family: "{{ ansible_os_family }}"
     installer_url: "{{ register_metadata.stdout | regex_replace('url\\s*','') | regex_replace('\n.*','') }}"
@@ -22,7 +22,7 @@
   tags: [chef-client, fact]
   when: register_metadata_url.changed
 
-- name: Ubuntu | Fetch installer
+- name: Centos | Fetch installer
   get_url:
     url="{{ installer_url }}"
     dest="{{ installer_dest }}/{{ installer_filename }}"
@@ -30,8 +30,8 @@
   tags: [chef-client, download]
   when: installer_url is defined and installer_filename is defined
 
-- name: Ubuntu | Install deb package
-  apt: deb="{{ installer_dest }}/{{ installer_filename }}"
-  register: register_deb
+- name: Centos | Install package
+  yum: name="{{ installer_dest }}/{{ installer_filename }}" state=present
   tags: [chef-client, installer, deb]
+  register: register_yum
   when: installer_dest is defined and installer_filename is defined

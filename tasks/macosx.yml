@@ -19,8 +19,8 @@
     installer_url: "{{ register_metadata.stdout | regex_replace('url\\s*','') | regex_replace('\n.*','') }}"
     installer_filename: "{{ register_metadata.stdout | regex_replace('url\\s*','') | regex_replace('\n.*','') | regex_replace('.*/','') }}"
     installer_dest: "/tmp" #installer_dest: "{{ installer_dir|defaults('/tmp') }}"
-  when: register_metadata_url.changed
   tags: [chef-client, fact]
+  when: register_metadata_url.changed
 
 - name: MacOSX | Fetch installer
   get_url:
