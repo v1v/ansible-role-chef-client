@@ -1,0 +1,8 @@
+FROM fedora:latest
+MAINTAINER Victor Martinez "VictorMartinezRubio+ansible@gmail.com"
+RUN yum install -y \
+  ansible && yum clean all
+VOLUME ["/playbook"]
+ENV ANSIBLE_FORCE_COLOR true
+ENV PYTHONUNBUFFERED 1
+CMD ansible-playbook -i /playbook/tests/inventory /playbook/tests/test.yml -c local -T 2

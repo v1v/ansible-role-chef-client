@@ -1,0 +1,11 @@
+---
+# defaults file for chef-client
+chef_client:
+  - log_dir: '/var/log/chef'
+  - conf_dir: '/etc/chef'
+  - interval: 1800
+  - splay: 300
+
+prerelease: false
+nightlies: false
+installer_dir: '/tmp'

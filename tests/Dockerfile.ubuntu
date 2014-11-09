@@ -1,0 +1,7 @@
+FROM ubuntu:14.04
+MAINTAINER Victor Martinez "VictorMartinezRubio+ansible@gmail.com"
+RUN apt install -y ansible
+VOLUME ["/playbook"]
+ENV ANSIBLE_FORCE_COLOR true
+ENV PYTHONUNBUFFERED 1
+CMD ansible-playbook -i /playbook/tests/inventory /playbook/tests/test.yml -c local -T 2

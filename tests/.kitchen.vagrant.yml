@@ -1,0 +1,28 @@
+---
+driver_plugin: vagrant
+
+provisioner:
+  name: ansible_playbook
+  roles_path: ../roles
+  group_vars_path: ../group_vars
+  host_vars_path: ../host_vars
+  hosts: localhost
+  playbook: test.yml
+  require_ansible_repo: true
+  ansible_verbose: false
+  ansible_verbosity: 2
+  ansible_version: 1.7.2
+
+platforms:
+  - name: nocm_centos-6.5
+    driver_plugin: vagrant
+    driver_config:
+      box: nocm_centos-6.5
+      box_url: http://puppet-vagrant-boxes.puppetlabs.com/centos-65-x64-virtualbox-nocm.box
+      network:
+      - ['forwarded_port', {guest: 8080, host: 8080}]
+      - [ 'private_network', { ip: '192.168.33.11' } ]
+
+suites:
+- name: chef-client
+  hosts: localhost

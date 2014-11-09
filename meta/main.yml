@@ -1,0 +1,14 @@
+---
+galaxy_info:
+  author: Victor Martinez
+  description: "Install and configure Chef Client."
+  license: MIT
+  min_ansible_version: 1.7.2
+  platforms:
+  - name: Ubuntu
+  - name: Centos
+
+  categories:
+  - database
+
+dependencies: []
