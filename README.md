@@ -1,5 +1,4 @@
-Ansible Role: Chef-client   [![Build Status](https://travis-ci.org/v1v/ansible-role-chef-client.svg?branch=master)](https://travis-ci.org/v1v/ansible-role-chef-client)
-
+Ansible Role: Chef-client  [![Build Status](https://travis-ci.org/v1v/ansible-role-chef-client.svg?branch=master)](https://travis-ci.org/v1v/ansible-role-chef-client)
 =========
 
 This cookbook is used to configure the system to be a Chef Client. For more information on how Chef itself works, see the [Chef Wiki](http://wiki.opscode.com)
