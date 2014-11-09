@@ -25,7 +25,7 @@ platforms:
       box: ubuntu-14.10
   - name: fedora-20
     driver_config:
-      box: ubuntu-14.10
+      box: fedora-20
 
 suites:
 - name: chef-client

@@ -1,15 +1,35 @@
-BOX_NAME = ENV['VAGRANT_BOX_NAME'] || 'XXXXXXX/XXXXX'
-
 Vagrant.configure('2') do |config|
-  config.vm.box = BOX_NAME
   config.vm.provision 'ansible' do |ansible|
     ansible.playbook = 'test.yml'
+    ansible.inventory_path = "vagrant.inventory"
     ansible.limit = 'all'
     ansible.sudo = true
+    ansible.verbose = 'vv'
     ansible.host_key_checking = false
   end
 
-  config.vm.define 'chef-client' do |c|
-    c.vm.host_name = 'chef-client'
+  config.vm.define :chef_ubuntu do |ubuntu|
+      ubuntu.vm.box = "ubuntu/trusty64"
+      ubuntu.vm.host_name = "chef-client-ubuntu"
+      ubuntu.vm.network "private_network", ip:"192.168.101.1"
   end
+
+  config.vm.define :chef_centos do |centos|
+      centos.vm.box = "chef/centos-6.5"
+      centos.vm.host_name = "chef-client-centos"
+      centos.vm.network "private_network", ip:"192.168.201.1"
+  end
+
+  config.vm.define :chef_fedora do |fedora|
+      fedora.vm.box = "chef/fedora-20"
+      fedora.vm.host_name = "chef-client-fedora"
+      fedora.vm.network "private_network", ip:"192.168.301.1"
+  end
+
+  config.vm.define :chef_debian do |debian|
+      debian.vm.box = "chef/debian-7.4"
+      debian.vm.host_name = "chef-client-debian"
+      debian.vm.network "private_network", ip:"192.168.401.1"
+  end
+
 end

@@ -3,26 +3,30 @@ driver_plugin: vagrant
 
 provisioner:
   name: ansible_playbook
-  roles_path: ../roles
-  group_vars_path: ../group_vars
-  host_vars_path: ../host_vars
+  roles_path: ../..
   hosts: localhost
-  playbook: test.yml
+  playbook: site.kitchen.yml
   require_ansible_repo: true
   ansible_verbose: false
   ansible_verbosity: 2
   ansible_version: 1.7.2
 
 platforms:
-  - name: nocm_centos-6.5
+  - name: ubuntu
+    driver_config:
+      box: ubuntu/trusty64
+  - name: centos
+    driver_config:
+      box: chef/centos-6.5
+  - name: fedora
+    driver_config:
+      box: chef/fedora-20
+      box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_fedora-20_chef-provisionerless.box
+  - name: debian
     driver_plugin: vagrant
     driver_config:
-      box: nocm_centos-6.5
-      box_url: http://puppet-vagrant-boxes.puppetlabs.com/centos-65-x64-virtualbox-nocm.box
-      network:
-      - ['forwarded_port', {guest: 8080, host: 8080}]
-      - [ 'private_network', { ip: '192.168.33.11' } ]
+      box: chef/debian-7.4
+      box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_debian-7.4_chef-provisionerless.box
 
 suites:
 - name: chef-client
-  hosts: localhost
