@@ -1,13 +1,2 @@
 ---
-# Include variables and define needed variables.
-# - name: Include OS-specific variables.
-#   include_vars: "{{ ansible_os_family }}.yml"
-
-- include: ubuntu.yml
-  when: ansible_distribution == 'Ubuntu'
-
-- include: centos.yml
-  when: ansible_distribution == 'CentOS'
-
-- include: macosx.yml
-  when: ansible_distribution == 'MacOSX'
+- include: "install_{{ type }}.yml"

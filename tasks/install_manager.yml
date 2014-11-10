@@ -1,0 +1,5 @@
+---
+- name: Manager Debian | Install chef-client via package manager
+  apt: pkg=chef state=present update_cache=yes
+  tags: [chef-client, manager, apt]
+  when: ansible_distribution == 'Debian'

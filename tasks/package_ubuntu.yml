@@ -1,37 +1,21 @@
 ---
-- name: Ubuntu | Fetch metadata
-  get_url:
-    url="https://www.opscode.com/chef/metadata?prerelease={{ prerelease }}&nightlies={{ nightlies }}&p={{ item }}&pv={{ ansible_distribution_version }}&m={{ ansible_architecture }}"
-    dest={{ installer_dir }}/metadata
-  with_items: ubuntu
-  register: register_metadata_url
-  tags: [chef-client, download]
-
-- name: Ubuntu | Read metadata
-  command: cat {{ installer_dir }}/metadata
-  register: register_metadata
-  tags: [chef-client, download]
-  when: register_metadata_url.changed
-
 - name: Ubuntu | Set metadata facts
   set_fact:
-    chef-client_loaded_os_family: "{{ ansible_os_family }}"
-    installer_url: "{{ register_metadata.stdout | regex_replace('url\\s*','') | regex_replace('\n.*','') }}"
-    installer_filename: "{{ register_metadata.stdout | regex_replace('url\\s*','') | regex_replace('\n.*','') | regex_replace('.*/','') }}"
-    installer_dest: "/tmp" #installer_dest: "{{ installer_dir|defaults('/tmp') }}"
+    platform: "ubuntu"
+    platform_version: {{ ansible_distribution_version }}
+    arch: {{ ansible_architecture }}
+    installer_dest: "{{ installer_dir }}/{{ version }}.deb"
   tags: [chef-client, fact]
-  when: register_metadata_url.changed
 
 - name: Ubuntu | Fetch installer
   get_url:
-    url="{{ installer_url }}"
-    dest="{{ installer_dest }}/{{ installer_filename }}"
+    url="http://www.getchef.com/chef/download?p={{ platform }}&pv={{ platform_version }}&m={{ arch }}&v={{ version }}&prerelease=false"
+    dest="{{ installer_dest }}"
   register: register_installer_url
   tags: [chef-client, download]
-  when: installer_url is defined and installer_filename is defined
 
 - name: Ubuntu | Install deb package
-  apt: deb="{{ installer_dest }}/{{ installer_filename }}"
+  apt: deb="{{ installer_dest }}"
   register: register_deb
   tags: [chef-client, installer, deb]
-  when: installer_dest is defined and installer_filename is defined
+  when: installer_dest is defined and register_installer_url.changed
