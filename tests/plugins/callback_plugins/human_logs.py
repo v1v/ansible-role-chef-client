@@ -5,8 +5,11 @@ def human_log(res):
     if type(res) == type(dict()):
         for field in FIELDS:
             if field in res.keys():
-                encoded_field = res[field].encode('utf-8')
-                print '\n{0}:\n{1}'.format(field, encoded_field)
+            	if type(res[field]) is list or type(res[field]) is tuple:
+            		encoded_field = res[field]
+                else:
+                	encoded_field = res[field].encode('utf-8')
+                print '\n{0}:\n{1}'.format(field, encoded_field)                
 
 class CallbackModule(object):
 
