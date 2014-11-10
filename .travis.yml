@@ -14,17 +14,17 @@ script:
   - echo localhost > tests/inventory
 
   # Check the role/playbook's syntax.
-  - "ansible-playbook -i tests/inventory tests/$SITE --syntax-check"
+  - "cd tests && ansible-playbook -i inventory $SITE --syntax-check"
 
   # Check the role/playbook's lint.
   - "ansible-lint tests/$SITE"
 
   # Run the role/playbook with ansible-playbook.
-  - "ansible-playbook -i tests/inventory tests/$SITE --connection=local --sudo -vv"
+  - "cd tests && ansible-playbook -i inventory $SITE --connection=local --sudo -vv"
 
   # Run the role/playbook again, checking to make sure it's idempotent.
   - >
-    ansible-playbook -i tests/inventory tests/$SITE --connection=local --sudo -vv
+    cd tests && ansible-playbook -i inventory $SITE --connection=local --sudo -vv
     | grep -q 'changed=0.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
