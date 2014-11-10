@@ -11,20 +11,22 @@ install:
   - pip install https://github.com/willthames/ansible-lint/archive/master.zip
 script:
 
-  - echo localhost > tests/inventory
+  - cd tests
+
+  - echo localhost > inventory
 
   # Check the role/playbook's syntax.
-  - "cd tests && ansible-playbook -i inventory $SITE --syntax-check"
+  - "ansible-playbook -i inventory $SITE --syntax-check"
 
   # Check the role/playbook's lint.
   - "ansible-lint tests/$SITE"
 
   # Run the role/playbook with ansible-playbook.
-  - "cd tests && ansible-playbook -i inventory $SITE --connection=local --sudo -vv"
+  - "ansible-playbook -i inventory $SITE --connection=local --sudo -vv"
 
   # Run the role/playbook again, checking to make sure it's idempotent.
   - >
-    cd tests && ansible-playbook -i inventory $SITE --connection=local --sudo -vv
+    ansible-playbook -i inventory $SITE --connection=local --sudo -vv
     | grep -q 'changed=0.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
