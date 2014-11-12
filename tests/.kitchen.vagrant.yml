@@ -29,4 +29,9 @@ platforms:
       box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_debian-7.4_chef-provisionerless.box
 
 suites:
-- name: chef-client
+- name: chef-client-sh
+  extra_vars:
+    type: sh
+- name: chef-client-package
+  extra_vars:
+    type: package
