@@ -1,5 +1,10 @@
 ---
-- name: Manager Debian | Install chef-client via package manager
+- name: Manager | Install chef-client via deb package manager
   apt: pkg=chef state=present update_cache=yes
   tags: [chef-client, manager, apt]
-  when: ansible_distribution == 'Debian'
+  when: ansible_os_family == 'Debian'
+
+- name: Manager | Install chef-client via yum package manager
+  yum: name=chef-client state=present
+  tags: [chef-client, manager, yum]
+  when: ansible_os_family == 'RedHat'

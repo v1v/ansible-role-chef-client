@@ -1,2 +1,19 @@
 ---
-- include: "{{ type }}_{{ ansible_distribution }}.yml"
+- name: Include OS-specific variables.
+  include_vars: "{{ ansible_distribution }}.yml"
+
+- name: Fetch installer
+  get_url:
+    url="http://www.getchef.com/chef/download?p={{ package['platform'] }}&pv={{ package['platform_version'] }}&m={{ package['arch'] }}&v={{ version }}&prerelease=false"
+    dest="{{ package['installer_dest'] }}"
+  register: register_installer_url
+  tags: [chef-client, download]
+
+- include: package_Debian.yml
+  when: ansible_os_family == 'Debian'
+
+- include: package_RedHat.yml
+  when: ansible_os_family == 'RedHat'
+
+- include: package_MacOSX.yml
+  when: ansible_distribution == 'MacOSX'

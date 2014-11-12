@@ -1,0 +1,6 @@
+---
+package:
+  platform: debian
+  platform_version: "{{ ansible_distribution_version }}"
+  arch: "{{ ansible_architecture }}"
+  installer_dest: "{{ installer_dir }}/{{ version }}.deb"

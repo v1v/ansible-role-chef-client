@@ -1,0 +1,6 @@
+---
+package:
+  platform: el
+  platform_version: "5"
+  arch: x86_64
+  installer_dest: "{{ installer_dir }}/{{ version }}.rpm"

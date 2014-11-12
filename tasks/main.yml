@@ -1,2 +1,6 @@
 ---
 - include: "install_{{ type }}.yml"
+
+- name: Check whether the chef-client has been installed
+  command: chef-client --version
+  tags: [chef-client, smoketest]

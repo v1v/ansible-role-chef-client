@@ -1,0 +1,6 @@
+---
+package:
+  platform: mac_os_x
+  platform_version: "{{ ansible_distribution_version }}"
+  arch: x86_64
+  installer_dest: "{{ installer_dir }}/{{ version }}.dmg"

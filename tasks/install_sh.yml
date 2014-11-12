@@ -11,3 +11,7 @@
   command: bash {{ installer_dir }}/install.sh
   register: register_sh_install
   tags: [chef-client, install]
+
+- name: install_sh | Check whether the chef-client is up & running
+  command: chef-client --version
+  tags: [chef-client, smoketest]
