@@ -8,6 +8,8 @@ galaxy_info:
   - name: Ubuntu
   - name: Centos
   - name: Fedora
+  - name: Debian
   categories:
-  - database
+  - packaging
+  - system
 dependencies: []
