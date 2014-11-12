@@ -19,14 +19,16 @@ script:
   - "ansible-playbook -i inventory $SITE --syntax-check"
 
   # Check the role/playbook's lint.
-  - "ansible-lint tests/$SITE"
+  - "ansible-lint $SITE"
 
   # Run the role/playbook with ansible-playbook.
   - "ansible-playbook -i inventory $SITE --connection=local --sudo -vv"
 
-  # Run the role/playbook again, checking to make sure it's idempotent.
+  # Run the role/playbook again.
+  - "ansible-playbook -i inventory $SITE --connection=local --sudo -vv | tee idempotent.log"
+
+  # Checking to make sure it's idempotent.
   - >
-    ansible-playbook -i inventory $SITE --connection=local --sudo -vv
-    | grep -q 'changed=0.*failed=0'
+    grep -q 'changed=0.*failed=0' idempotent.log
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
