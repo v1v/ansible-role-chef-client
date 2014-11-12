@@ -5,4 +5,4 @@ RUN yum install -y \
 VOLUME ["/playbook"]
 ENV ANSIBLE_FORCE_COLOR true
 ENV PYTHONUNBUFFERED 1
-CMD ansible-playbook -i /playbook/tests/inventory /playbook/tests/test.yml -c local -T 2
+CMD cd /playbook/tests && ansible-playbook -i inventory.docker site.ci.yml -c local -T 2 -vv

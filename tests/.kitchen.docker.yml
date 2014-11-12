@@ -11,7 +11,7 @@ provisioner:
   group_vars_path: ../group_vars
   host_vars_path: ../host_vars
   hosts: localhost
-  playbook: test.yml
+  playbook: site.kitchen.yml
   require_ansible_repo: true
   ansible_verbose: true
   ansible_version: 1.7.2
@@ -28,5 +28,9 @@ platforms:
       box: fedora-20
 
 suites:
-- name: chef-client
-  hosts: localhost
+- name: chef-client-sh
+  extra_vars:
+    type: sh
+- name: chef-client-package
+  extra_vars:
+    type: package

@@ -2,7 +2,7 @@
 language: python
 python: "2.7"
 env:
-  - SITE=test.yml
+  - SITE=site.ci.yml
 before_install:
  - sudo apt-get update -qq
  - sudo apt-get install -qq python-apt python-pycurl

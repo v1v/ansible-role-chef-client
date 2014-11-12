@@ -14,7 +14,7 @@ Style Testing
 -------------
 Ansible style can be performed by [Ansible-lint](https://github.com/willthames/ansible-lint) by issuing
 ```
-ansible-lint test.yml
+ansible-lint site.ci.yml
 ```
 
 Integration Testing
