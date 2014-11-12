@@ -1,5 +1,12 @@
 ---
-- include: "install_{{ type }}.yml"
+- include: install_sh.yml
+  when: type == 'sh'
+
+- include: install_package.yml
+  when: type == 'package'
+
+- include: install_manager.yml
+  when: type == 'manager'
 
 - name: Check whether the chef-client has been installed
   command: chef-client --version
