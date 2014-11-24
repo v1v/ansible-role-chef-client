@@ -8,6 +8,7 @@ before_install:
  - sudo apt-get install -qq python-apt python-pycurl
 install:
   - pip install ansible==1.6.0
+  - ansible --version
   - pip install https://github.com/willthames/ansible-lint/archive/master.zip
 script:
 
