@@ -56,15 +56,6 @@ or
 export KITCHEN_YAML=.kitchen.docker.yml
 kitchen test
 ```
-~~NOTE~~: If you use MacOSX then set your docker socket attribute accordingly:
-
-```ruby
-	---
-	driver:
-		name: docker
-		socket: tcp://YourIPAddress:YourPort
-	...
-```
 
 Words about Docker testing
 --------------------------
