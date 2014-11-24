@@ -3,6 +3,7 @@ language: python
 python: "2.7"
 env:
   - SITE=site.ci.yml
+  - INTEGRATION=site.integration-tests.yml
 before_install:
  - sudo apt-get update -qq
  - sudo apt-get install -qq python-apt python-pycurl
@@ -33,3 +34,6 @@ script:
     grep -q 'changed=0.*failed=0' idempotent.log
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
+
+  # Run Integration Tests role/playbook again.
+  - "ansible-playbook -i inventory $INTEGRATION --connection=local --sudo -vv"

@@ -1,0 +1,12 @@
+---
+#
+# site.integration-tests.yml
+#
+- hosts: all
+  sudo: True
+  tasks:
+    # Tests
+    - name: Check chef-client
+      command: which chef-client
+      register: chef_client_path
+    - debug: msg="Chef-client was installed in {{ chef_client_path.stdout }}"
