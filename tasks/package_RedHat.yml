@@ -1,6 +1,6 @@
 ---
 - name: RedHat | Install yum package
-  yum: name="{{ package['installer_dest'] }}"
+  yum: name="{{ chef_client_package['installer_dest'] }}"
   register: register_yum
   tags: [chef-client, installer, yum]
-  when: package['installer_dest'] is defined
+  when: chef_client_package['installer_dest'] is defined

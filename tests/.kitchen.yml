@@ -1,28 +1,31 @@
 ---
-driver_plugin: vagrant
+driver:
+  name: docker
+  use_sudo: false
+  ssh:
+    pty: true
+
+driver_config:
+  hostname: kitchen
+  socket: <%= ENV['DOCKER_HOST'] %>
 
 provisioner:
   name: ansible_playbook
-  roles_path: ../roles
-  group_vars_path: ../group_vars
-  host_vars_path: ../host_vars
+  roles_path: ../../
   hosts: localhost
-  playbook: test.yml
+  playbook: site.kitchen.yml
   require_ansible_repo: true
-  ansible_verbose: false
-  ansible_verbosity: 2
-  ansible_version: 1.7.2
+  ansible_verbose: true
 
 platforms:
-  - name: nocm_centos-6.5
-    driver_plugin: vagrant
-    driver_config:
-      box: nocm_centos-6.5
-      box_url: http://puppet-vagrant-boxes.puppetlabs.com/centos-65-x64-virtualbox-nocm.box
-      network:
-      - ['forwarded_port', {guest: 8080, host: 8080}]
-      - [ 'private_network', { ip: '192.168.33.11' } ]
+  - name: centos-6.5
+  - name: ubuntu-13.10
+  - name: ubuntu-14.04
 
 suites:
-- name: chef-client
-  hosts: localhost
+- name: chef-client-sh
+  extra_vars:
+    type: sh
+- name: chef-client-package
+  extra_vars:
+    type: package

@@ -1,18 +1,4 @@
 ---
-# defaults file for chef-client
-chef_client:
-  log_dir: '/var/log/chef'
-  conf_dir: '/etc/chef'
-  interval: 1800
-  splay: 300
-
-prerelease: false
-installer_dir: '/tmp'
-
-## Different typs:
-##  - sh
-##  - manager
-##  - package
-type: package
-
-version: latest
+chef_client_install_type: package
+chef_client_installer_dir: '/tmp'
+chef_client_version: latest

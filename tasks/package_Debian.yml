@@ -1,6 +1,6 @@
 ---
 - name: Debian | Install deb package
-  apt: deb="{{ package['installer_dest'] }}"
+  apt: deb="{{ chef_client_package['installer_dest'] }}"
   register: register_deb
   tags: [chef-client, installer, deb]
-  when: package['installer_dest'] is defined
+  when: chef_client_package['installer_dest'] is defined

@@ -1,6 +1,6 @@
 ---
-package:
+chef_client_package:
   platform: debian
   platform_version: "{{ ansible_distribution_version }}"
   arch: "{{ ansible_architecture }}"
-  installer_dest: "{{ installer_dir }}/{{ version }}.deb"
+  installer_dest: "{{ chef_client_installer_dir }}/{{ chef_client_version }}.deb"

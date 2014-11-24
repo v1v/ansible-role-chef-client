@@ -5,16 +5,17 @@ driver:
   ssh:
     pty: true
 
+driver_config:
+  hostname: kitchen
+  socket: <%= ENV['DOCKER_HOST'] %>
+
 provisioner:
   name: ansible_playbook
-  roles_path: ../roles
-  group_vars_path: ../group_vars
-  host_vars_path: ../host_vars
+  roles_path: ../../
   hosts: localhost
   playbook: site.kitchen.yml
   require_ansible_repo: true
   ansible_verbose: true
-  ansible_version: 1.7.2
 
 platforms:
   - name: centos-6.5
@@ -23,9 +24,9 @@ platforms:
   - name: ubuntu-14.10
     driver_config:
       box: ubuntu-14.10
-  - name: fedora-20
-    driver_config:
-      box: fedora-20
+#  - name: fedora-20
+#    driver_config:
+#      box: fedora-20
 
 suites:
 - name: chef-client-sh

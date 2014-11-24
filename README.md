@@ -3,42 +3,62 @@ Ansible Role: Chef-client  [![Build Status](https://travis-ci.org/v1v/ansible-ro
 
 This cookbook is used to configure the system to be a Chef Client. For more information on how Chef itself works, see the [Chef Wiki](http://wiki.opscode.com)
 
-
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
-
-https://docs.getchef.com/api_omnitruck.html
+NA
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+```yaml
+# Basic settings
+chef_client_install_type: package
+chef_client_installer_dir: '/tmp'
+chef_client_version: latest
+
+# List of package per OS (You shouldn´t change them!!)
+chef_client_package:
+  platform:
+  platform_version:
+  arch:
+  installer_dest:
+```
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
-
-`chef::client` is tested on Ubuntu 8.04+, Debian 5.0, CentOS 5.x, Fedora 10+, OpenBSD 4.6, FreeBSD 7.1 and Gentoo.
-
-`runit` cookbook is suggested for RubyGems installation. No other cookbooks are required for clients.
-
+NA
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+Including an example of how to use chef-client:
 
-    - hosts: servers
+    - hosts: chef_clients
       roles:
-         - { role: username.rolename, x: 42 }
+         - { role: v1v.chef-client, chef_client_version: latest }
 
 License
 -------
 
 GNUv3
+
+Thanks
+------
+
+To the Chef community:
+- [Chef-Client recipe](https://github.com/opscode-cookbooks/chef-client)
+
+Callbacks plugins:
+- [profile-tasks](https://github.com/jlafon/ansible-profile)
+- [timestamp](https://github.com/ginsys/ansible-plugins)
+- [human_logs](https://github.com/ginsys/ansible-plugins)
+
+Feedback, bugs, requests
+------------------------
+
+Are [welcome](https://github.com/v1v/ansible-role-chef-client/issues)!
 
 Author Information
 ------------------

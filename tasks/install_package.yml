@@ -4,8 +4,8 @@
 
 - name: Fetch installer
   get_url:
-    url="http://www.getchef.com/chef/download?p={{ package['platform'] }}&pv={{ package['platform_version'] }}&m={{ package['arch'] }}&v={{ version }}&prerelease=false"
-    dest="{{ package['installer_dest'] }}"
+    url="http://www.getchef.com/chef/download?p={{ chef_client_package['platform'] }}&pv={{ chef_client_package['platform_version'] }}&m={{ chef_client_package['arch'] }}&v={{ chef_client_version }}&prerelease=false"
+    dest="{{ chef_client_package['installer_dest'] }}"
   register: register_installer_url
   tags: [chef-client, download]
 
@@ -14,6 +14,3 @@
 
 - include: package_RedHat.yml
   when: ansible_os_family == 'RedHat'
-
-- include: package_MacOSX.yml
-  when: ansible_distribution == 'MacOSX'

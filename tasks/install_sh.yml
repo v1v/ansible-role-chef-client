@@ -2,16 +2,11 @@
 - name: install_sh | Fetch sh
   get_url:
     url=https://www.opscode.com/chef/install.sh
-    dest={{ installer_dir }}/install.sh
+    dest={{ chef_client_installer_dir }}/install.sh
   register: register_sh_url
   tags: [chef-client, download]
 
-## TODO: version https://docs.getchef.com/install_omnibus.html
 - name: install_sh | Execute installer
-  command: bash {{ installer_dir }}/install.sh
+  command: bash {{ chef_client_installer_dir }}/install.sh
   register: register_sh_install
   tags: [chef-client, install]
-
-- name: install_sh | Check whether the chef-client is up & running
-  command: chef-client --version
-  tags: [chef-client, smoketest]

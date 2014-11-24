@@ -3,7 +3,7 @@ galaxy_info:
   author: Victor Martinez
   description: "Install and configure Chef Client."
   license: license GPLv3
-  min_ansible_version: 1.7.2
+  min_ansible_version: 1.5.0
   platforms:
   - name: Ubuntu
   - name: Centos

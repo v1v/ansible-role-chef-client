@@ -1,6 +1,7 @@
 ---
-package:
+chef_client_package:
   platform: el
-  platform_version: "5"
-  arch: x86_64
-  installer_dest: "{{ installer_dir }}/{{ version }}.rpm"
+  arch: "{{ ansible_architecture }}"
+  installer_dest: "{{ chef_client_installer_dir }}/{{ chef_client_version }}.rpm"
+  platform_version: "6"
+  #platform_version: "{{ ansible_lsb.major_release }}"

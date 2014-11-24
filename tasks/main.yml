@@ -1,9 +1,7 @@
 ---
+- debug: var=ansible_architecture
 - include: install_sh.yml
-  when: type == 'sh'
+  when: chef_client_install_type == 'sh'
 
 - include: install_package.yml
-  when: type == 'package'
-
-- include: install_manager.yml
-  when: type == 'manager'
+  when: chef_client_install_type == 'package'

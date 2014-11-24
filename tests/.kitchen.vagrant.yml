@@ -9,7 +9,7 @@ provisioner:
   require_ansible_repo: true
   ansible_verbose: false
   ansible_verbosity: 2
-  ansible_version: 1.7.2
+  ansible_version: 1.5.0
 
 platforms:
   - name: ubuntu
