@@ -1,5 +1,4 @@
 ---
-- debug: var=ansible_architecture
 - include: install_sh.yml
   when: chef_client_install_type == 'sh'
 
