@@ -10,3 +10,5 @@
       command: which chef-client
       register: chef_client_path
     - debug: msg="Chef-client was installed in {{ chef_client_path.stdout }}"
+    - fail: msg="Chef-client Not Found, tests failed."
+      when: chef_client_path.stdout != "/usr/bin/chef-client"
