@@ -18,15 +18,15 @@ provisioner:
   ansible_verbose: true
 
 platforms:
+  - name: debian-wheezy
+  - name: debian-squeeze
+  - name: centos-5.7
   - name: centos-6.5
-    driver_config:
-      box: centos-6.5
+  - name: ubuntu-13.10
+  - name: ubuntu-14.04
   - name: ubuntu-14.10
-    driver_config:
-      box: ubuntu-14.10
+#  - name: fedora-19
 #  - name: fedora-20
-#    driver_config:
-#      box: fedora-20
 
 suites:
 - name: chef-client-sh
